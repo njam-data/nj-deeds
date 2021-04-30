@@ -5,6 +5,7 @@ import DotEnv from 'dotenv'
 import { format, subDays } from 'date-fns'
 import execa from 'execa'
 import glob from 'fast-glob'
+import got from 'got'
 
 import { createDateRange } from './lib/date.js'
 

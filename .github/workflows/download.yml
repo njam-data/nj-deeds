@@ -3,7 +3,7 @@ name: Download data
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '11 23 * * *'
+    - cron:  '0 4 * * *'
 jobs:
   atlantic:
     runs-on: ubuntu-latest
