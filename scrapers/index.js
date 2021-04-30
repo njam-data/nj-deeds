@@ -66,19 +66,9 @@ const counties = {
 }
 
 if (args[0] && counties[args[0]]) {
-  const county = counties[args[0]]
+  for (const date of dates) {
+    const county = counties[args[0]]
 
-  const options = {
-    ...county.options,
-    PARCEL_API,
-    PARCEL_API_TOKEN,
-    date
-  }
-
-  await county.scraper(options)
-  await compileFiles({ dates, county })
-} else {
-  for (const county of counties) {
     const options = {
       ...county.options,
       PARCEL_API,
@@ -88,6 +78,20 @@ if (args[0] && counties[args[0]]) {
 
     await county.scraper(options)
     await compileFiles({ dates, county })
+  }
+} else {
+  for (const date of dates) {
+    for (const county of counties) {
+      const options = {
+        ...county.options,
+        PARCEL_API,
+        PARCEL_API_TOKEN,
+        date
+      }
+  
+      await county.scraper(options)
+      await compileFiles({ dates, county })
+    }
   }
 }
 

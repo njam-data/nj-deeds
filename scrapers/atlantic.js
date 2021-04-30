@@ -39,7 +39,7 @@ export default async function scraper (options = {}) {
   const { page, browser } = await createBrowserContext({
     useCookies: false,
     downloadsPath: downloadsDirectory,
-    headless: false
+    headless: true
   })
 
   const parcels = new Parcels({

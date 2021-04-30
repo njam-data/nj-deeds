@@ -20,6 +20,7 @@ jobs:
       with:
         crate: xsv
         version: latest
+        use-tool-cache: true
     - name: Download & process
       env:
         PARCEL_API: ${{ secrets.PARCEL_API }}
