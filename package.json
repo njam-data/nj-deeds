@@ -1,0 +1,23 @@
+{
+  "name": "nj-deeds",
+  "version": "0.0.0",
+  "scripts": {},
+  "devDependencies": {
+    "date-fns": "^2.21.1",
+    "desm": "^1.1.0",
+    "dotenv": "^8.2.0",
+    "got": "^11.8.2",
+    "new-jersey-counties": "github:njam-data/new-jersey-counties",
+    "node-xlsx": "^0.16.1",
+    "playwright": "^1.10.0",
+    "standard": "^16.0.3"
+  },
+  "type": "module",
+  "dependencies": {
+    "csv-writer": "^1.6.0",
+    "execa": "^5.0.0",
+    "fast-glob": "^3.2.5",
+    "readdir-glob": "^1.1.1",
+    "title-case": "^3.0.3"
+  }
+}
