@@ -57,7 +57,7 @@ const counties = {
     }
   },
   salem: {
-    scrape: salem,
+    scraper: salem,
     options: {
       county: 'salem',
       portalUrl: 'http://216.64.40.6/publicsearch/'
@@ -77,7 +77,7 @@ if (args[0] && counties[args[0]]) {
     }
 
     await county.scraper(options)
-    await compileFiles({ dates, county })
+    await compileFiles({ dates, county: options.county })
   }
 } else {
   for (const date of dates) {
@@ -90,7 +90,7 @@ if (args[0] && counties[args[0]]) {
       }
   
       await county.scraper(options)
-      await compileFiles({ dates, county })
+      await compileFiles({ dates, county: options.county })
     }
   }
 }
