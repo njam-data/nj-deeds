@@ -3,6 +3,7 @@ import * as fs from 'fs/promises'
 
 import { join } from 'desm'
 import { format } from 'date-fns'
+import retry from 'async-retry'
 
 import { writeJson, writeCsv } from './lib/fs.js'
 import { formatCsvData } from './lib/csv.js'
@@ -252,8 +253,10 @@ export default async function scraper (options = {}) {
       })
     }
 
-    await page.waitForTimeout(100)
-    await page.click('text="Results"')
+    await page.waitForTimeout(500)
+    await retry(async () => {
+      await page.click('text="Results"')
+    })
     await page.waitForTimeout(100)
     const next = await rowElement.$('xpath=following-sibling::*')
 
@@ -262,7 +265,9 @@ export default async function scraper (options = {}) {
     }
 
     await page.waitForTimeout(500)
-    await next.click()
+    await retry(async () => {
+      await next.click()
+    })
     await page.waitForTimeout(100)
   })
 

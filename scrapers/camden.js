@@ -2,7 +2,8 @@ import * as path from 'path'
 import * as fs from 'fs/promises'
 
 import { join } from 'desm'
-import { format, subDays } from 'date-fns'
+import { format } from 'date-fns'
+import retry from 'async-retry'
 
 import { writeJson, writeCsv } from './lib/fs.js'
 import { formatCsvData } from './lib/csv.js'
@@ -98,10 +99,15 @@ export default async function scraper (options = {}) {
 
   for (const [i, button] of paginationButtons.entries()) {
     if (i !== 0) {
-      await button.click()
+      await retry(async () => {
+        await button.click()
+      })
     }
 
-    await page.click('.ag-row')
+    await retry(async () => {
+      await page.click('.ag-row')
+    })
+
     await repeat(25, async () => {
       await page.keyboard.press('ArrowDown')
     })
@@ -253,8 +259,10 @@ export default async function scraper (options = {}) {
         })
       }
 
-      await page.waitForTimeout(300)
-      await page.click('text="Results"')
+      await page.waitForTimeout(500)
+      await retry(async () => {
+        await page.click('text="Results"')
+      })
     }
   }  
 

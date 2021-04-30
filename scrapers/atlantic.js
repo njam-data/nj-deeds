@@ -247,8 +247,6 @@ export default async function scraper (options = {}) {
     await page.waitForTimeout(500)
     await retry(async () => {
       await page.click('text="Results"')
-    }, {
-      retries: 5
     })
     await page.waitForTimeout(100)
     const next = await rowElement.$('xpath=following-sibling::*')
@@ -260,8 +258,6 @@ export default async function scraper (options = {}) {
     await page.waitForTimeout(500)
     await retry(async () => {
       await next.click()
-    }, {
-      retries: 5
     })
     await page.waitForTimeout(100)
   })
