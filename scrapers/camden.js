@@ -114,7 +114,6 @@ export default async function scraper (options = {}) {
 
     const rowElements = await page.$$('.ag-row')
     for (const rowElement of rowElements) {
-      const viewbutton = await rowElement.$('button')
       const rowCells = await rowElement.$$('.ag-cell')
 
       const rowValues = await Promise.all(rowCells.map(async (cell) => {
@@ -129,7 +128,13 @@ export default async function scraper (options = {}) {
         return obj
       }, {})
 
-      await viewbutton.click()
+      await retry(async () => {
+        await page.waitForTimeout(500)
+        const viewbutton = await rowElement.$('button')
+        await viewbutton.click()
+      })
+  
+      
       await page.waitForTimeout(500)
       const documentTableRows = await page.$$('#documentDetail table tr')
 

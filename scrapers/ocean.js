@@ -104,9 +104,12 @@ export default async function scraper (options = {}) {
   await repeat(totalRecords, async () => {
     const { row, rowElement } = await getRow()
 
-    await page.waitForTimeout(500)
-    const viewbutton = await rowElement.$('button')
-    await viewbutton.click()
+    await retry(async () => {
+      await page.waitForTimeout(500)
+      const viewbutton = await rowElement.$('button')
+      await viewbutton.click()
+    })
+
     await page.waitForTimeout(500)
     const documentTableRows = await page.$$('#documentDetail table tr')
 
