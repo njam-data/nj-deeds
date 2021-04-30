@@ -141,16 +141,20 @@ export default async function scraper (options = {}) {
       document[key] = value
     }
 
-    const match = row.Lot.match(/^([0-9.]*)([a-zA-Z])?(.*)/)
-
-    let lot
+    let lot = null
     let qualifier = null
-    if (match.length === 1) {
-      lot = match[0]
-    } else {
-      lot = match[1]
-      if (match[2]) {
-        qualifier = match[2] + match[3]
+    let match
+
+    if (row.Lot) {
+      match = row.Lot.match(/^([0-9.]*)([a-zA-Z])?(.*)/)
+
+      if (match.length === 1) {
+        lot = match[0]
+      } else {
+        lot = match[1]
+        if (match[2]) {
+          qualifier = match[2] + match[3]
+        }
       }
     }
 
