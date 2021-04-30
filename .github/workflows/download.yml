@@ -21,7 +21,7 @@ jobs:
         crate: xsv
         version: latest
         use-tool-cache: true
-    - name: Download & process
+    - name: Download
       env:
         PARCEL_API: ${{ secrets.PARCEL_API }}
         PARCEL_API_TOKEN: ${{ secrets.PARCEL_API_TOKEN }}
@@ -54,7 +54,7 @@ jobs:
         crate: xsv
         version: latest
         use-tool-cache: true
-    - name: Download & process
+    - name: Download
       env:
         PARCEL_API: ${{ secrets.PARCEL_API }}
         PARCEL_API_TOKEN: ${{ secrets.PARCEL_API_TOKEN }}
@@ -87,7 +87,7 @@ jobs:
         crate: xsv
         version: latest
         use-tool-cache: true
-    - name: Download & process
+    - name: Download
       env:
         PARCEL_API: ${{ secrets.PARCEL_API }}
         PARCEL_API_TOKEN: ${{ secrets.PARCEL_API_TOKEN }}
@@ -120,7 +120,7 @@ jobs:
         crate: xsv
         version: latest
         use-tool-cache: true
-    - name: Download & process
+    - name: Download
       env:
         PARCEL_API: ${{ secrets.PARCEL_API }}
         PARCEL_API_TOKEN: ${{ secrets.PARCEL_API_TOKEN }}
@@ -153,7 +153,7 @@ jobs:
         crate: xsv
         version: latest
         use-tool-cache: true
-    - name: Download & process
+    - name: Download
       env:
         PARCEL_API: ${{ secrets.PARCEL_API }}
         PARCEL_API_TOKEN: ${{ secrets.PARCEL_API_TOKEN }}

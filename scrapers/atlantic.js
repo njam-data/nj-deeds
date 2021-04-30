@@ -3,6 +3,7 @@ import * as fs from 'fs/promises'
 
 import { join } from 'desm'
 import { format } from 'date-fns'
+import retry from 'async-retry'
 
 import { writeJson, writeCsv } from './lib/fs.js'
 import { formatCsvData } from './lib/csv.js'
