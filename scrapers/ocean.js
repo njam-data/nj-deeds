@@ -261,8 +261,8 @@ export default async function scraper (options = {}) {
       })
     }
 
-    await page.waitForTimeout(500)
     await retry(async () => {
+      await page.waitForTimeout(500)
       await page.click('text="Results"')
     })
     await page.waitForTimeout(100)
@@ -272,8 +272,8 @@ export default async function scraper (options = {}) {
       return
     }
 
-    await page.waitForTimeout(500)
     await retry(async () => {
+      await page.waitForTimeout(1000)
       await next.click()
     })
     await page.waitForTimeout(100)
