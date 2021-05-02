@@ -261,21 +261,21 @@ export default async function scraper (options = {}) {
       })
     }
 
+    let next
     await retry(async () => {
       await page.waitForTimeout(500)
       await page.click('text="Results"')
+      await page.waitForTimeout(100)
+      const next = await rowElement.$('xpath=following-sibling::*')
+      if (!next) {
+        return
+      }
+      await retry(async () => {
+        await page.waitForTimeout(1000)
+        await next.click()
+      })
     })
-    await page.waitForTimeout(100)
-    const next = await rowElement.$('xpath=following-sibling::*')
 
-    if (!next) {
-      return
-    }
-
-    await retry(async () => {
-      await page.waitForTimeout(1000)
-      await next.click()
-    })
     await page.waitForTimeout(100)
   })
 
