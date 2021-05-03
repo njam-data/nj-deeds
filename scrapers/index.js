@@ -67,9 +67,9 @@ const counties = {
 
 async function main () {
   if (args[0] && counties[args[0]]) {
+    const county = counties[args[0]]
+
     for (const date of dates) {
-      const county = counties[args[0]]
-  
       const options = {
         ...county.options,
         PARCEL_API,
@@ -81,11 +81,12 @@ async function main () {
       await county.scraper(options)
     }
   
-    await compileFiles({ dates, county: options.county })
+    await compileFiles({ dates, county: county.options.county })
   } else {
     const keys = Object.keys(counties)
     for (const key of keys) {
       const county = counties[key]
+
       for (const date of dates) {
         const options = {
           ...county.options,
@@ -97,7 +98,7 @@ async function main () {
         await county.scraper(options)
       }
   
-      await compileFiles({ dates, county: options.county })
+      await compileFiles({ dates, county: county.options.county })
     }
   }
 }
