@@ -76,12 +76,14 @@ if (args[0] && counties[args[0]]) {
       date
     }
 
+    console.log('date', date)
     await county.scraper(options)
-    await compileFiles({ dates, county: options.county })
   }
+
+  await compileFiles({ dates, county: options.county })
 } else {
-  for (const date of dates) {
-    for (const county of counties) {
+  for (const county of counties) {
+    for (const date of dates) {
       const options = {
         ...county.options,
         PARCEL_API,
@@ -90,8 +92,9 @@ if (args[0] && counties[args[0]]) {
       }
   
       await county.scraper(options)
-      await compileFiles({ dates, county: options.county })
     }
+
+    await compileFiles({ dates, county: options.county })
   }
 }
 
