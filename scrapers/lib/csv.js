@@ -17,7 +17,7 @@ export function formatCsvData (sourceRows, options = {}) {
     { id: 'book_type', title: 'book_type' },
     { id: 'file_number', title: 'file_number' },
     { id: 'type', title: 'type' },
-    { id: 'legal', title: 'legal' },
+    { id: 'legal', title: 'legal' }
   ]
 
   if (errors) {

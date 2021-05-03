@@ -12,7 +12,7 @@ export class Parcels {
       json: options,
       responseType: 'json',
       headers: {
-        'Authorization': `basic ${this.token}`
+        Authorization: `basic ${this.token}`
       }
     })
 

@@ -49,7 +49,7 @@ export default async function scraper (options = {}) {
     token: PARCEL_API_TOKEN
   })
 
-  let allRows = []
+  const allRows = []
   const errors = []
 
   await page.goto(portalUrl)
@@ -87,7 +87,7 @@ export default async function scraper (options = {}) {
       totalErrors: 0,
       message: 'No records found'
     }
-  
+
     await writeJson(scrapeInfoFilepath, scrapeInfo)
     await browser.close()
     return

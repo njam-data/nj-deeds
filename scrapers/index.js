@@ -65,25 +65,11 @@ const counties = {
   }
 }
 
-if (args[0] && counties[args[0]]) {
-  for (const date of dates) {
-    const county = counties[args[0]]
-
-    const options = {
-      ...county.options,
-      PARCEL_API,
-      PARCEL_API_TOKEN,
-      date
-    }
-
-    console.log('date', date)
-    await county.scraper(options)
-  }
-
-  await compileFiles({ dates, county: options.county })
-} else {
-  for (const county of counties) {
+async function main () {
+  if (args[0] && counties[args[0]]) {
     for (const date of dates) {
+      const county = counties[args[0]]
+  
       const options = {
         ...county.options,
         PARCEL_API,
@@ -91,12 +77,32 @@ if (args[0] && counties[args[0]]) {
         date
       }
   
+      console.log('date', date)
       await county.scraper(options)
     }
-
+  
     await compileFiles({ dates, county: options.county })
+  } else {
+    const keys = Object.keys(counties)
+    for (const key of keys) {
+      const county = counties[key]
+      for (const date of dates) {
+        const options = {
+          ...county.options,
+          PARCEL_API,
+          PARCEL_API_TOKEN,
+          date
+        }
+    
+        await county.scraper(options)
+      }
+  
+      await compileFiles({ dates, county: options.county })
+    }
   }
 }
+
+main()
 
 async function compileFiles (options) {
   const { dates, county } = options

@@ -1,7 +1,10 @@
 {
   "name": "nj-deeds",
   "version": "0.0.0",
-  "scripts": {},
+  "scripts": {
+    "lint": "standard",
+    "lintfix": "standard --fix"
+  },
   "devDependencies": {
     "date-fns": "^2.21.1",
     "desm": "^1.1.0",

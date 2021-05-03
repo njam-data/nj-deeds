@@ -48,7 +48,7 @@ export default async function scraper (options = {}) {
     token: PARCEL_API_TOKEN
   })
 
-  let allRows = []
+  const allRows = []
   const errors = []
 
   await page.goto(portalUrl)
@@ -68,7 +68,7 @@ export default async function scraper (options = {}) {
   endDateInput.fill(formInputDate)
 
   const rowsPerPageInput = await page.$('body > div:nth-child(1) > div.ng-isolate-scope > div > div.tab-pane.ng-scope.active > div > div:nth-child(3) > div:nth-child(2) > span > select')
-  await rowsPerPageInput.selectOption("25")
+  await rowsPerPageInput.selectOption('25')
 
   const searchButton = await form.$('text="Search"')
   await searchButton.click()
@@ -89,7 +89,7 @@ export default async function scraper (options = {}) {
       totalErrors: 0,
       message: 'No records found'
     }
-  
+
     await writeJson(scrapeInfoFilepath, scrapeInfo)
     await browser.close()
     return
@@ -133,8 +133,7 @@ export default async function scraper (options = {}) {
         const viewbutton = await rowElement.$('button')
         await viewbutton.click()
       })
-  
-      
+
       await page.waitForTimeout(500)
       const documentTableRows = await page.$$('#documentDetail table tr')
 
@@ -169,10 +168,10 @@ export default async function scraper (options = {}) {
       let lot = null
       let qualifier = null
       let match
-  
+
       if (row.Lot) {
         match = row.Lot.match(/^([0-9.]*)([a-zA-Z])?(.*)/)
-  
+
         if (match.length === 1) {
           lot = match[0]
         } else {
@@ -273,7 +272,7 @@ export default async function scraper (options = {}) {
         await page.click('text="Results"')
       })
     }
-  }  
+  }
 
   await writeJson(countyDataJsonFilepath, allRows)
   const csvData = await formatCsvData(allRows)
