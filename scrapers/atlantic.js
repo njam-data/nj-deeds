@@ -87,8 +87,11 @@ export default async function scraper (options = {}) {
       message: 'No records found'
     }
   
+    console.log('writeJson')
     await writeJson(scrapeInfoFilepath, scrapeInfo)
+    console.log('browser.close')
     await browser.close()
+    console.log('return')
     return
   }
 
