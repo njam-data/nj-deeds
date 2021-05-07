@@ -158,6 +158,29 @@ export default async function scraper (options = {}) {
       }
     }
 
+    const municipalities = {
+      'AVALON': 'AVALON BORO',
+      'CAPE MAY': 'CAPE MAY CITY',
+      'DENNIS': 'DENNIS TWP',
+      'LOWER TOWNSHIP': 'LOWER TWP',
+      'MIDDLE TOWNSHIP': 'MIDDLE TWP',
+      'NORTH WILDWOOD': 'NORTH WILDWOOD CITY',
+      'OCEAN CITY': 'OCEAN CITY CITY',
+      'SEA ISLE CITY': 'SEA ISLE CITY CITY',
+      'STONE HARBOR': 'STONE HARBOR BORO',
+      'UPPER TOWNSHIP': 'UPPER TWP',
+      'WILDWOOD': 'WILDWOOD CITY',
+      'WILDWOOD CREST': 'WILDWOOD CREST BORO'
+    }
+
+    function rewriteMunicipality (muni) {
+      if (municipalities[muni]) {
+        return municipalities[muni]
+      }
+
+      return muni
+    }
+
     const data = {
       address: null,
       price: document.consideration,
@@ -167,7 +190,7 @@ export default async function scraper (options = {}) {
       block: row.Block,
       lot,
       qualifier,
-      municipality: row.Town.replace('BOROUGH', 'BORO'),
+      municipality: rewriteMunicipality(row.Town),
       county: countySearch,
       book: row.Book,
       page: row.Page,

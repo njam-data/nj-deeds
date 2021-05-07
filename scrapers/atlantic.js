@@ -159,6 +159,28 @@ export default async function scraper (options = {}) {
       }
     }
 
+    const municipalities = {
+      'ABSECON': 'ABSECON CITY',
+      'ATLANTIC CITY': 'ATLANTIC CITY CITY',
+      'BRIGANTINE': 'BRIGANTINE CITY',
+      'HAMMONTON': 'HAMMONTON TOWN',
+      'LINWOOD': 'LINWOOD CITY',
+      'LONGPORT': 'LONGPORT BORO',
+      'MARGATE': 'MARGATE CITY CITY',
+      'NORTHFIELD': 'NORTHFIELD CITY',
+      'PLEASANTVILLE': 'PLEASANTVILLE CITY',
+      'SOMERS POINT': 'SOMERS POINT CITY',
+      'VENTNOR': 'VENTNOR CITY'
+    }
+
+    function rewriteMunicipality (muni) {
+      if (municipalities[muni]) {
+        return municipalities[muni]
+      }
+
+      return muni.replace('BOROUGH', 'BORO')
+    }
+
     const data = {
       address: null,
       price: document.consideration,
@@ -168,7 +190,7 @@ export default async function scraper (options = {}) {
       block: row.Block,
       lot,
       qualifier,
-      municipality: row.Town.replace('BOROUGH', 'BORO'),
+      municipality: rewriteMunicipality(row.Town),
       county,
       book: row.Book,
       page: row.Page,

@@ -158,6 +158,47 @@ export default async function scraper (options = {}) {
       }
     }
 
+    const municipalities = {
+      'BARN LT': 'BARNEGAT LIGHT BORO',
+      'BARNEGAT': 'BARNEGAT TWP',
+      'BCH HVN': 'BEACH HAVEN BORO',
+      'BCHWOOD': 'BEACHWOOD BORO',
+      'BERKELEY': 'BERKELEY TWP',
+      'BRICK': 'BRICK TWP',
+      'EAGLESWD': 'EAGLESWOOD TWP',
+      'HRVY CED': 'HARVEY CEDARS BORO',
+      'JACKSON': 'JACKSON TWP',
+      'LACEY': 'LACEY TWP',
+      'LAKEHRST': 'LAKEHURST BORO',
+      'LAKEWOOD': 'LAKEWOOD TWP',
+      'LAVLETTE': 'LAVALLETTE BORO',
+      'LONG BCH': 'LONG BEACH TWP',
+      'LT. EGG': 'LITTLE EGG HARBOR TWP',
+      'MANCHTER': 'MANCHESTER TWP',
+      'OCEAN': 'OCEAN TWP',
+      'OCN GATE': 'OCEAN GATE BORO',
+      'PINE BCH': 'PINE BEACH BORO',
+      'PLUMSTED': 'PLUMSTED TWP',
+      'PT BEACH': 'PT PLEASANT BEACH BORO',
+      'PT PLEAS': 'POINT PLEASANT BORO',
+      'SEA HTS': 'SEASIDE HEIGHTS BORO',
+      'SEA PARK': 'SEASIDE PARK BORO',
+      'SHP BOTT': 'SHIP BOTTOM BORO',
+      'SO. TOMS': 'SOUTH TOMS RIVER BORO',
+      'STAFFORD': 'STAFFORD TWP',
+      'SURFCITY': 'SURF CITY BORO',
+      'TOMS RIV': 'TOMS RIVER TWP',
+      'TUCKERTN': 'TUCKERTON BORO'
+    }
+
+    function rewriteMunicipality (muni) {
+      if (municipalities[muni]) {
+        return municipalities[muni]
+      }
+
+      return muni
+    }
+
     const data = {
       address: null,
       price: document.consideration,
@@ -167,7 +208,7 @@ export default async function scraper (options = {}) {
       block: row.Block,
       lot,
       qualifier,
-      municipality: row.Town.replace('BOROUGH', 'BORO'),
+      municipality: rewriteMunicipality(row.Town),
       county: countySearch,
       book: row.Book,
       page: row.Page,
