@@ -178,7 +178,7 @@ export default async function scraper (options = {}) {
         return municipalities[muni]
       }
 
-      return muni.replace('BOROUGH', 'BORO')
+      return (muni || '').replace('BOROUGH', 'BORO')
     }
 
     const data = {
