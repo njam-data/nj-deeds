@@ -1,4 +1,4 @@
-name: Download data
+name: Download Salem data
 
 on:
   workflow_dispatch:

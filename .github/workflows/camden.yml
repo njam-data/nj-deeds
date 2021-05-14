@@ -1,4 +1,4 @@
-name: Download data
+name: Download Camden data
 
 on:
   workflow_dispatch:
