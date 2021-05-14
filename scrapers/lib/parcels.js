@@ -7,7 +7,7 @@ export class Parcels {
   }
 
   async request (options) {
-    console.log('request options', options)
+    // console.log('request options', options)
     const result = await got.post(this.url, {
       json: options,
       responseType: 'json',
@@ -16,7 +16,7 @@ export class Parcels {
       }
     })
 
-    console.log('result', result.body)
+    // console.log('result', result.body)
     return result.body
   }
 }

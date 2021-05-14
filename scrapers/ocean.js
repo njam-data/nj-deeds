@@ -107,6 +107,7 @@ export default async function scraper (options = {}) {
     await retry(async () => {
       await page.waitForTimeout(500)
       const viewbutton = await rowElement.$('button')
+      console.log('trying to click viewbutton')
       await viewbutton.click()
     })
 
@@ -218,7 +219,7 @@ export default async function scraper (options = {}) {
       legal: document.legal
     }
 
-    console.log('data', data)
+    // console.log('data', data)
 
     let response
     try {
@@ -246,7 +247,7 @@ export default async function scraper (options = {}) {
         })
       }
     } catch (error) {
-      console.log('error fetching parcel', error)
+      // console.log('error fetching parcel', error)
       errors.push({
         error_message: 'error fetching parcel',
         error,
@@ -302,9 +303,11 @@ export default async function scraper (options = {}) {
       })
     }
 
-    let next
+    let attempt = 0
     await retry(async () => {
+      attempt++
       await page.waitForTimeout(500)
+      console.log('trying to click results', attempt)
       await page.click('text="Results"')
       await page.waitForTimeout(100)
       const next = await rowElement.$('xpath=following-sibling::*')
@@ -313,6 +316,7 @@ export default async function scraper (options = {}) {
       }
       await retry(async () => {
         await page.waitForTimeout(1000)
+        console.log('trying to click next', attempt)
         await next.click()
       })
     })
